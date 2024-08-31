@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Your Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+
+    <div class="max-w-3xl mx-auto bg-white p-8 mt-10 shadow-lg rounded-lg">
+        <h1 class="text-3xl font-bold text-center mb-6">Resume</h1>
+
+        <!-- Personal Information -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Personal Information</h2>
+            <div class="mb-4">
+                <h3 class="text-xl font-bold">Full Name</h3>
+                <p id="name" class="text-gray-700"></p>
+            </div>
+            <div class="mb-4">
+                <h3 class="text-xl font-bold">Email</h3>
+                <p id="email" class="text-gray-700"></p>
+            </div>
+            <div class="mb-4">
+                <h3 class="text-xl font-bold">Phone Number</h3>
+                <p id="phone" class="text-gray-700"></p>
+            </div>
+            <div class="mb-4">
+                <h3 class="text-xl font-bold">Address</h3>
+                <p id="address" class="text-gray-700"></p>
+            </div>
+        </section>
+
+        <!-- About Me -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">About Me</h2>
+            <p id="about" class="text-gray-700"></p>
+        </section>
+
+        <!-- Career History -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Career History</h2>
+            <p id="career_history" class="text-gray-700"></p>
+        </section>
+
+        <!-- Education & Training -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Education & Training</h2>
+            <p id="education" class="text-gray-700"></p>
+        </section>
+
+        <!-- Related Skills -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Related Skills</h2>
+            <p id="skills" class="text-gray-700"></p>
+        </section>
+
+        <!-- Personal References -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Personal References</h2>
+            <p id="references" class="text-gray-700"></p>
+        </section>
+    </div>
+
+    <script>
+        // Retrieve query parameters and display them in the resume
+        const params = new URLSearchParams(window.location.search);
+        document.getElementById('name').textContent = params.get('name') || 'N/A';
+        document.getElementById('email').textContent = params.get('email') || 'N/A';
+        document.getElementById('phone').textContent = params.get('phone') || 'N/A';
+        document.getElementById('address').textContent = params.get('address') || 'N/A';
+        document.getElementById('about').textContent = params.get('about') || 'N/A';
+        document.getElementById('career_history').textContent = params.get('career_history') || 'N/A';
+        document.getElementById('education').textContent = params.get('education') || 'N/A';
+        document.getElementById('skills').textContent = params.get('skills') || 'N/A';
+        document.getElementById('references').textContent = params.get('references') || 'N/A';
+    </script>
+</body>
+
+</html>
