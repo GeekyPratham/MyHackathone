@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Donation Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-yellow-100 p-10">
+    <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <h2 class="text-lg font-bold mb-4 text-center">DONATION FORM</h2>
+        <form id="donationForm">
+            <div id="members">
+                <div class="mb-4 member flex items-center">
+                    <input type="text" class="block w-full mt-1 border border-gray-300 rounded-md" placeholder="Full Name" required>
+                    <button type="button" class="ml-2 bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600 removeMember">✖</button>
+                </div>
+            </div>
+            <div class="mb-4">
+                <button type="button" id="addMember" class="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600">Add Member</button>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">Choose Payment Type<span class="text-red-500">*</span></label>
+                <select class="block w-full mt-1 border border-gray-300 rounded-md" required>
+                    <option value="">---Select---</option>
+                    <option value="credit-card">Credit Card</option>
+                    <option value="debit-card">Debit Card</option>
+                    <option value="net-banking">Net Banking</option>
+                    <option value="upi">UPI</option>
+                    <option value="wallet">Wallet</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">Email ID<span class="text-red-500">*</span></label>
+                <input type="email" class="block w-full mt-1 border border-gray-300 rounded-md" placeholder="Email" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">Mobile Number<span class="text-red-500">*</span></label>
+                <input type="tel" class="block w-full mt-1 border border-gray-300 rounded-md" placeholder="Mobile Number" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">Donation Amount in INR<span class="text-red-500">*</span></label>
+                <input type="number" class="block w-full mt-1 border border-gray-300 rounded-md" placeholder="Amount in INR" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">PAN Number</label>
+                <input type="text" class="block w-full mt-1 border border-gray-300 rounded-md" placeholder="PAN Number">
+            </div>
+            <!-- Description Box -->
+            <div class="mb-4">
+                <label class="block text-gray-700">Why are you donating to the college?</label>
+                <textarea class="block w-full mt-1 border border-gray-300 rounded-md" placeholder="Please share your reasons for donating..." rows="4"></textarea>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">Captcha: <span id="captchaText" class="font-bold text-blue-500"></span><span class="text-red-500">*</span></label>
+                <input type="text" id="captchaInput" class="block w-full mt-1 border border-gray-300 rounded-md" placeholder="Enter Captcha" required>
+                <button type="button" id="refreshCaptcha" class="text-sm text-blue-500 mt-2 hover:underline">Refresh Captcha</button>
+            </div>
+            <div class="mb-4">
+                <label class="inline-flex items-center">
+                    <input type="checkbox" class="form-checkbox text-blue-600">
+                    <span class="ml-2 text-gray-700">I agree to receive communications on this donation over WhatsApp</span>
+                </label>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">PROCEED</button>
+            </div>
+            <div class="mt-4 text-center">
+                <span class="text-gray-700">Number of Members: <span id="memberCount">1</span></span>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        function generateCaptcha() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let captcha = '';
+            for (let i = 0; i < 6; i++) {
+                captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return captcha;
+        }
+
+        function updateCaptcha() {
+            const captcha = generateCaptcha();
+            document.getElementById('captchaText').innerText = captcha;
+            return captcha;
+        }
+
+        document.getElementById('addMember').addEventListener('click', function() {
+            const membersDiv = document.getElementById('members');
+            const newMemberDiv = document.createElement('div');
+            newMemberDiv.classList.add('mb-4', 'member', 'flex', 'items-center');
+            newMemberDiv.innerHTML = `
+                <input type="text" class="block w-full mt-1 border border-gray-300 rounded-md" placeholder="Full Name" required>
+                <button type="button" class="ml-2 bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600 removeMember">✖</button>
+            `;
+            membersDiv.appendChild(newMemberDiv);
+            updateMemberCount();
+        });
+
+        document.getElementById('members').addEventListener('click', function(event) {
+            if (event.target.classList.contains('removeMember')) {
+                event.target.closest('.member').remove();
+                updateMemberCount();
+            }
+        });
+
+        function updateMemberCount() {
+            const memberCount = document.querySelectorAll('.member').length;
+            document.getElementById('memberCount').innerText = memberCount;
+        }
+
+        let currentCaptcha = updateCaptcha(); // Initialize the captcha when the page loads
+
+        document.getElementById('refreshCaptcha').addEventListener('click', function() {
+            currentCaptcha = updateCaptcha(); // Refresh the captcha
+        });
+
+        document.getElementById('donationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission for verification
+            const userCaptchaInput = document.getElementById('captchaInput').value;
+            if (userCaptchaInput === currentCaptcha) {
+                alert('Captcha verified successfully!');
+                // Proceed with form submission or further processing
+            } else {
+                alert('Captcha is incorrect. Please try again.');
+                currentCaptcha = updateCaptcha(); // Refresh the captcha if incorrect
+                document.getElementById('captchaInput').value = ''; // Clear the input
+            }
+        });
+    </script>
+</body>
+</html>
