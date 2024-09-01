@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Information Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold mb-4">Event Information</h2>
+        <form>
+            <div class="mb-4">
+                <label for="date" class="block text-gray-700 font-medium mb-2">Date:</label>
+                <input type="date" id="date" name="date" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+            </div>
+
+            <div class="mb-4">
+                <label for="time" class="block text-gray-700 font-medium mb-2">Time:</label>
+                <input type="time" id="time" name="time" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+            </div>
+
+            <div class="mb-4">
+                <label for="location" class="block text-gray-700 font-medium mb-2">Location:</label>
+                <input type="text" id="location" name="location" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="e.g., Virtual Event">
+            </div>
+
+            <div class="mb-4">
+                <label for="category" class="block text-gray-700 font-medium mb-2">Category:</label>
+                <input type="text" id="category" name="category" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="e.g., Arts, Athletics, Virtual">
+            </div>
+
+            <div class="mb-4">
+                <label for="contact" class="block text-gray-700 font-medium mb-2">Contact:</label>
+                <input type="text" id="contact" name="contact" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="e.g., Harvard Hindu Alumni">
+            </div>
+
+            <div class="mb-4">
+                <label for="contact-email" class="block text-gray-700 font-medium mb-2">Contact Email:</label>
+                <input type="email" id="contact-email" name="contact-email" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="e.g., harvardhindualumni@gmail.com">
+            </div>
+
+            <div class="mb-4">
+                <label for="description" class="block text-gray-700 font-medium mb-2">Description:</label>
+                <textarea id="description" name="description" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Description of the event..."></textarea>
+            </div>
+
+            <div class="mb-4">
+                <label for="presenter" class="block text-gray-700 font-medium mb-2">Presenter:</label>
+                <input type="text" id="presenter" name="presenter" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="e.g., Suryadeep Hooda">
+            </div>
+
+            <div class="mb-4">
+                <label for="join-link" class="block text-gray-700 font-medium mb-2">Link to Join:</label>
+                <input type="url" id="join-link" name="join-link" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="e.g., https://example.com/meeting-link">
+            </div>
+
+            <div class="flex justify-end">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
